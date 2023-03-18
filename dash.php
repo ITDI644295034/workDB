@@ -1,21 +1,26 @@
 <?php
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "carshop";
-$an = 0;
-// Create connection
-$conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-?>
+    $servername = "localhost";
+    $dbusername = "root";
+    $dbpassword = "";
+    $dbname = "carshop";
+    $an = 0;
+    // Create connection
+    // $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname); //คำสั่ง connect database
 
-<?php
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// echo "Connected successfully";
 // $sql = "INSERT INTO `cars` (`car_id`, `brand`, `color`, `vehicle_regis`, `price`) VALUES (NULL, 'Honda', 'Blue', '1 กข 1234', '1000000')";
 // mysqli_query($conn, $sql);
 // echo $sql;
+// $getallusers = "SELECT * FROM cars";
+// $result = mysqli_query($conn, $insertcar);
 $getallusers = "SELECT * FROM cars";
 $result = mysqli_query($conn, $getallusers);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +49,8 @@ $result = mysqli_query($conn, $getallusers);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="updateData.php">UpdateCars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AddCars.php">AddCars</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -84,8 +90,9 @@ $result = mysqli_query($conn, $getallusers);
                 ?>
                     <div class="col mb-5">
                         <div class="card h-100">
+
                             <!-- Product image--> 
-                            <img class="card-img-top" src="<?php echo "pic/" .$row['photo']?>" alt="" width="300" height="200" />
+                            <img class="card-img-top" src="<?php echo $row['photo']?>" alt="" width="300" height="200" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -102,7 +109,7 @@ $result = mysqli_query($conn, $getallusers);
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="updateData.php">View options</a></div>
                             </div>
                         </div>
                     </div>
